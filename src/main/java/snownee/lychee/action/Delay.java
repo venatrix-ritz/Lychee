@@ -1,23 +1,41 @@
 package snownee.lychee.action;
 
+import net.minecraft.world.entity.EntityTypes;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.world.entity.EntityTypes;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Marker;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.Lychee;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.context.ActionContext;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.action.ActionData;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.action.ActionMarker;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.action.PostAction;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.action.PostActionCommonProperties;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.action.PostActionType;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.action.PostActionTypes;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.context.LycheeContext;
 
 public record Delay(PostActionCommonProperties commonProperties, float seconds) implements PostAction {
@@ -35,7 +53,7 @@ public record Delay(PostActionCommonProperties commonProperties, float seconds) 
 	public void apply(LycheeContext context, ActionContext actionContext, int times) {
 		var actionMarker = actionContext.marker;
 		if (actionMarker == null) {
-			var marker = new Marker(EntityType.MARKER, context.level());
+			var marker = new Marker(EntityTypes.MARKER, context.level());
 			var pos = actionContext.getOrNull(LootContextParams.ORIGIN);
 			if (pos != null) {
 				marker.setPos(pos);

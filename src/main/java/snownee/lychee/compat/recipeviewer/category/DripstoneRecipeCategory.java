@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 import org.joml.Vector2f;
 import org.joml.Vector2fc;
 
-import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Blocks;

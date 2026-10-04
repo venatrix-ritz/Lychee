@@ -39,12 +39,21 @@ public class EntityTickingRecipeType extends LycheeRecipeType<EntityTickingRecip
 		super.refreshCache(recipeMap);
 		ListMultimap<EntityType<?>, RecipeHolder<EntityTickingRecipe>> map = ArrayListMultimap.create();
 		for (RecipeHolder<EntityTickingRecipe> recipe : recipes) {
-			recipe.value()
-					.predicate()
-					.entityType()
-					.map($ -> $.types().stream())
-					.orElseGet(Stream::empty)
-					.forEach(type -> map.put(type.value(), recipe));
+			try {
+				com.google.gson.JsonElement json = net.minecraft.advancements.predicates.entity.EntityPredicate.CODEC.encodeStart(com.mojang.serialization.JsonOps.INSTANCE, recipe.value().predicate()).getOrThrow();
+				if (json.isJsonObject() && json.getAsJsonObject().has("type")) {
+					com.google.gson.JsonElement typeJson = json.getAsJsonObject().get("type");
+					if (typeJson.isJsonPrimitive()) {
+						net.minecraft.resources.Identifier id = net.minecraft.resources.Identifier.parse(typeJson.getAsString().replace("#", ""));
+						if (typeJson.getAsString().startsWith("#")) {
+						    net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.get(net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ENTITY_TYPE, id))
+						        .ifPresent(tag -> tag.forEach(holder -> map.put(holder.value(), recipe)));
+						} else {
+						    net.minecraft.core.registries.BuiltInRegistries.ENTITY_TYPE.getOptional(id).ifPresent(type -> map.put(type, recipe));
+						}
+					}
+				}
+			} catch (Exception e) {}
 		}
 		for (EntityType<?> type : BuiltInRegistries.ENTITY_TYPE) {
 			((LycheeEntityType) type).lychee$setTickingRecipes(ImmutableList.copyOf(map.get(type)));
@@ -75,7 +84,7 @@ public class EntityTickingRecipeType extends LycheeRecipeType<EntityTickingRecip
 			if (recipe.interval() > 1 && (entity.tickCount + 1) % recipe.interval() != 0) {
 				continue;
 			}
-			if (recipe.withoutTypePredicate().matches(level, entity.position(), entity) && recipe.test(context) && recipe.matches(
+			if (recipe.predicate().matches(level, entity.position(), entity) && recipe.test(context) && recipe.matches(
 					context,
 					level)) {
 				context.put(recipeHolder);

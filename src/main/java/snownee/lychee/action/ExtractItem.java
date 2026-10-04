@@ -3,7 +3,7 @@ package snownee.lychee.action;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.util.ExtraCodecs;
 import snownee.lychee.LootContextKeys;
 import snownee.lychee.context.ActionContext;

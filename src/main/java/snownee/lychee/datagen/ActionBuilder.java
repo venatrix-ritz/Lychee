@@ -11,7 +11,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.RecordBuilder;
 
-import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.predicates.MinMaxBounds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryOps;
 import snownee.lychee.action.RandomSelect;

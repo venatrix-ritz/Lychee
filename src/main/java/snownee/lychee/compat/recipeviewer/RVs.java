@@ -14,7 +14,7 @@ import com.mojang.datafixers.util.Pair;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
@@ -71,7 +71,7 @@ public final class RVs {
 		var list = Lists.<Component>newArrayList();
 		if (recipe.comment().map(it -> !Strings.isNullOrEmpty(it)).orElse(false)) {
 			var comment = recipe.comment().orElseThrow();
-			if (I18n.exists(comment)) {
+			if (net.minecraft.locale.Language.getInstance().has(comment)) {
 				comment = I18n.get(comment);
 			}
 			Splitter.on('\n').splitToStream(comment).map(Component::literal).forEach(list::add);

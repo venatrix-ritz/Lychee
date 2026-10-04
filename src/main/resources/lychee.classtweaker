@@ -1,9 +1,9 @@
 classTweaker v1 official
-accessible class net/minecraft/advancements/criterion/StatePropertiesPredicate$PropertyMatcher
-accessible method net/minecraft/advancements/criterion/StatePropertiesPredicate$PropertyMatcher <init> (Ljava/lang/String;Lnet/minecraft/advancements/criterion/StatePropertiesPredicate$ValueMatcher;)V
-accessible class net/minecraft/advancements/criterion/StatePropertiesPredicate$ExactMatcher
-accessible method net/minecraft/advancements/criterion/StatePropertiesPredicate$ExactMatcher <init> (Ljava/lang/String;)V
-accessible class net/minecraft/advancements/criterion/StatePropertiesPredicate$RangedMatcher
+accessible class net/minecraft/advancements/predicates/StatePropertiesPredicate$PropertyMatcher
+accessible method net/minecraft/advancements/predicates/StatePropertiesPredicate$PropertyMatcher <init> (Ljava/lang/String;Lnet/minecraft/advancements/predicates/StatePropertiesPredicate$ValueMatcher;)V
+accessible class net/minecraft/advancements/predicates/StatePropertiesPredicate$ExactMatcher
+accessible method net/minecraft/advancements/predicates/StatePropertiesPredicate$ExactMatcher <init> (Ljava/lang/String;)V
+accessible class net/minecraft/advancements/predicates/StatePropertiesPredicate$RangedMatcher
 
 accessible field net/minecraft/world/level/storage/loot/IntRange min Lnet/minecraft/world/level/storage/loot/providers/number/NumberProvider;
 accessible field net/minecraft/world/level/storage/loot/IntRange max Lnet/minecraft/world/level/storage/loot/providers/number/NumberProvider;
@@ -17,7 +17,7 @@ accessible method net/minecraft/client/particle/DripParticle$DripHangParticle <i
 
 accessible field net/minecraft/world/level/block/DropperBlock DISPENSE_BEHAVIOUR Lnet/minecraft/core/dispenser/DispenseItemBehavior;
 
-accessible class net/minecraft/advancements/criterion/LocationPredicate$PositionPredicate
+accessible class net/minecraft/advancements/predicates/LocationPredicate$PositionPredicate
 
 accessible field net/minecraft/world/entity/item/FallingBlockEntity blockState Lnet/minecraft/world/level/block/state/BlockState;
 
@@ -37,3 +37,4 @@ accessible class net/minecraft/world/level/ServerExplosion$StackCollector
 accessible field net/minecraft/client/Minecraft blockModelResolver Lnet/minecraft/client/renderer/block/BlockModelResolver;
 
 accessible field net/minecraft/resources/RegistryOps lookupProvider Lnet/minecraft/resources/RegistryOps$RegistryInfoLookup;
+accessible field net/minecraft/client/renderer/entity/EntityRenderDispatcher blockModelResolver Lnet/minecraft/client/renderer/block/BlockModelResolver;

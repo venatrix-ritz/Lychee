@@ -2,7 +2,7 @@ package snownee.lychee.util.action;
 
 import java.util.function.Function;
 
-import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;

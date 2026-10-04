@@ -7,7 +7,7 @@ import org.jspecify.annotations.Nullable;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 
-import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.predicates.MinMaxBounds;
 import net.minecraft.core.Holder;
 import net.minecraft.util.TriState;
 import net.minecraft.world.clock.WorldClock;

@@ -7,7 +7,7 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.JavaOps;
 
-import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStackTemplate;

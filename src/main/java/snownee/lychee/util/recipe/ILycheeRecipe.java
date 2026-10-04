@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 import org.jspecify.annotations.Nullable;
 
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.minecraft.advancements.criterion.BlockPredicate;
-import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.predicates.BlockPredicate;
+import net.minecraft.advancements.predicates.MinMaxBounds;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;

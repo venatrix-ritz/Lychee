@@ -1,19 +1,33 @@
 package snownee.lychee.compat.recipeviewer.category;
 
+import net.minecraft.world.entity.EntityTypes;
 import java.util.Objects;
+import net.minecraft.world.entity.EntityTypes;
 import java.util.function.Function;
+import net.minecraft.world.entity.EntityTypes;
 import java.util.function.Supplier;
 
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.client.renderer.entity.state.LightningBoltRenderState;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.LightningRodBlock;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.RecipeTypes;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.client.gui.GuiGameElement;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.client.gui.RenderElement;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.compat.recipeviewer.element.ShadowElement;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.recipes.LightningChannelingRecipe;
 
 public class LightningChannelingRecipeCategory extends ItemShapelessRecipeCategory<LightningChannelingRecipe> {
@@ -23,7 +37,7 @@ public class LightningChannelingRecipeCategory extends ItemShapelessRecipeCatego
 
 	public LightningChannelingRecipeCategory() {
 		super(RecipeTypes.LIGHTNING_CHANNELING);
-		lightningBolt.entityType = EntityType.LIGHTNING_BOLT;
+		lightningBolt.entityType = EntityTypes.LIGHTNING_BOLT;
 	}
 
 	@Override
@@ -55,7 +69,7 @@ public class LightningChannelingRecipeCategory extends ItemShapelessRecipeCatego
 				"lightning_rod", (builder, recipeHolder) -> {
 					Supplier<BlockState> blockStateSupplier = () -> {
 						int time = (int) lightningBolt.seed % 80;
-						BlockState blockState = Blocks.LIGHTNING_ROD.defaultBlockState();
+						BlockState blockState = Blocks.LIGHTNING_ROD.unaffected().defaultBlockState();
 						if (time <= 7) {
 							blockState = blockState.setValue(LightningRodBlock.POWERED, true);
 						}

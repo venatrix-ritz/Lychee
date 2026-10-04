@@ -29,10 +29,10 @@ import com.mojang.serialization.Decoder;
 import com.mojang.serialization.DynamicOps;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.criterion.BlockPredicate;
-import net.minecraft.advancements.criterion.DataComponentMatchers;
-import net.minecraft.advancements.criterion.NbtPredicate;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
+import net.minecraft.advancements.predicates.DataComponentMatchers;
+import net.minecraft.advancements.predicates.NbtPredicate;
+import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -93,7 +93,7 @@ public class BlockPredicateExtensions {
 			BlockStateProperties.LEVEL,
 			BlockStateProperties.LEVEL_HONEY,
 			BlockStateProperties.LEVEL_CAULDRON,
-			BlockStateProperties.DRIPSTONE_THICKNESS
+			BlockStateProperties.SPELEOTHEM_THICKNESS
 	));
 
 	public static final Codec<BlockPredicate> CODEC_FOR_TESTING = codec(true);
@@ -313,7 +313,7 @@ public class BlockPredicateExtensions {
 				final var matcher = predicate.properties().flatMap(it -> PropertiesPredicateExtensions.findMatcher(it, name));
 				if (matcher.isPresent()) {
 					for (Comparable<?> object : property.getPossibleValues()) {
-						if (matcher.get().match(
+						if (PropertiesPredicateExtensions.match(matcher.get(),
 								block.getStateDefinition(),
 								state.trySetValue((Property) property, (Comparable) object)
 						)) {
@@ -352,36 +352,41 @@ public class BlockPredicateExtensions {
 			}
 		}
 		final var list = Lists.<Component>newArrayList(blockState.getBlock().getName());
-		final var matchers = predicate.properties().map(StatePropertiesPredicate::properties);
-		if (matchers.isPresent()) {
-			for (final var matcher : matchers.get()) {
-				final var name = Component.literal(matcher.name() + "=").withStyle(ChatFormatting.GRAY);
-				if (matcher.valueMatcher() instanceof StatePropertiesPredicate.ExactMatcher(String value)) {
-					name.append(Component.literal(value).withStyle(ChatFormatting.WHITE));
-				} else if (matcher.valueMatcher() instanceof StatePropertiesPredicate.RangedMatcher(
-						Optional<String> minValue, Optional<String> maxValue)) {
-					final var definition = blockState.getBlock().getStateDefinition();
-					final Property property = definition.getProperty(matcher.name());
-					if (property == null) {
-						continue;
+		if (predicate.properties().isPresent()) {
+			try {
+				com.google.gson.JsonObject propertiesJson = net.minecraft.advancements.predicates.StatePropertiesPredicate.CODEC.encodeStart(com.mojang.serialization.JsonOps.INSTANCE, predicate.properties().get()).getOrThrow().getAsJsonObject();
+				for (java.util.Map.Entry<String, com.google.gson.JsonElement> entry : propertiesJson.entrySet()) {
+					String propName = entry.getKey();
+					com.google.gson.JsonElement valueJson = entry.getValue();
+					final var name = Component.literal(propName + "=").withStyle(ChatFormatting.GRAY);
+					if (valueJson.isJsonPrimitive()) {
+						name.append(Component.literal(valueJson.getAsString()).withStyle(ChatFormatting.WHITE));
+					} else if (valueJson.isJsonObject()) {
+						com.google.gson.JsonObject rangeObj = valueJson.getAsJsonObject();
+						Optional<String> minValue = rangeObj.has("min") ? Optional.of(rangeObj.get("min").getAsString()) : Optional.empty();
+						Optional<String> maxValue = rangeObj.has("max") ? Optional.of(rangeObj.get("max").getAsString()) : Optional.empty();
+						final var definition = blockState.getBlock().getStateDefinition();
+						final Property property = definition.getProperty(propName);
+						if (property != null) {
+							final var rangePair = Suppliers.memoize(() -> {
+								final var sorted = property.getPossibleValues()
+										.stream()
+										.sorted()
+										.toList();
+								return Pair.of(sorted.getFirst(), sorted.getLast());
+							});
+							var min = minValue.orElseGet(() -> property.getName((Comparable) rangePair.get().getFirst()));
+							var max = maxValue.orElseGet(() -> property.getName((Comparable) rangePair.get().getSecond()));
+							name.append(Component.literal(min).withStyle(ChatFormatting.WHITE));
+							if (!min.equals(max)) {
+								name.append(Component.literal("~").withStyle(ChatFormatting.GRAY));
+								name.append(Component.literal(max).withStyle(ChatFormatting.WHITE));
+							}
+						}
 					}
-					final var rangePair = Suppliers.memoize(() -> {
-						final var sorted = property.getPossibleValues()
-								.stream()
-								.sorted()
-								.toList();
-						return Pair.of(sorted.getFirst(), sorted.getLast());
-					});
-					var min = minValue.orElseGet(() -> property.getName((Comparable) rangePair.get().getFirst()));
-					var max = maxValue.orElseGet(() -> property.getName((Comparable) rangePair.get().getSecond()));
-					name.append(Component.literal(min).withStyle(ChatFormatting.WHITE));
-					if (!min.equals(max)) {
-						name.append(Component.literal("~").withStyle(ChatFormatting.GRAY));
-						name.append(Component.literal(max).withStyle(ChatFormatting.WHITE));
-					}
+					list.add(name);
 				}
-				list.add(name);
-			}
+			} catch (Exception e) {}
 		}
 		if (predicate.nbt().isPresent()) {
 			list.add(Component.translatable("tip.lychee.nbtPredicate").withStyle(ChatFormatting.GRAY));

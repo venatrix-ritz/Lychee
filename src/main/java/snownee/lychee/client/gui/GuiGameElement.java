@@ -1,38 +1,70 @@
 package snownee.lychee.client.gui;
 
+import net.minecraft.world.entity.EntityTypes;
 import org.joml.Quaternionf;
+import net.minecraft.world.entity.EntityTypes;
 import org.joml.Vector2f;
+import net.minecraft.world.entity.EntityTypes;
 import org.joml.Vector3f;
+import net.minecraft.world.entity.EntityTypes;
 import org.joml.Vector3fc;
+import net.minecraft.world.entity.EntityTypes;
 import org.jspecify.annotations.Nullable;
 
+import net.minecraft.world.entity.EntityTypes;
 import com.google.common.base.Preconditions;
+import net.minecraft.world.entity.EntityTypes;
 import com.mojang.blaze3d.platform.Lighting;
+import net.minecraft.world.entity.EntityTypes;
 import com.mojang.math.Transformation;
 
+import net.minecraft.world.entity.EntityTypes;
 import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.client.renderer.block.model.BlockDisplayContext;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.client.renderer.entity.state.BlockDisplayEntityRenderState;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.Display;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.entity.EntityTypes;
 import snownee.lychee.util.VecHelper;
 
 public class GuiGameElement {
@@ -127,7 +159,7 @@ public class GuiGameElement {
 			if (blockState != null) {
 				withRotationOffset(VecHelper.getCenterOf(BlockPos.ZERO));
 				renderState = new BlockDisplayEntityRenderState();
-				renderState.entityType = EntityType.BLOCK_DISPLAY;
+				renderState.entityType = EntityTypes.BLOCK_DISPLAY;
 				renderState.renderState = createFreshRenderState();
 				renderState.setData(CUSTOM_LIGHTING, Lighting.Entry.ITEMS_FLAT);
 
@@ -136,7 +168,7 @@ public class GuiGameElement {
 				}
 
 				this.blockState = this.blockState.rotate(Rotation.CLOCKWISE_180);
-				Minecraft.getInstance().blockModelResolver.update(
+				Minecraft.getInstance().getEntityRenderDispatcher().blockModelResolver.update(
 						renderState.blockModel,
 						this.blockState,
 						BlockDisplayContext.create());

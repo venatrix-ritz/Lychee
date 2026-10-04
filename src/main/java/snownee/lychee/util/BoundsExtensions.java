@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.util.Objects;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.criterion.MinMaxBounds;
+import net.minecraft.advancements.predicates.MinMaxBounds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.Mth;

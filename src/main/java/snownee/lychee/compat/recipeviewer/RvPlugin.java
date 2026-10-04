@@ -115,8 +115,8 @@ public class RvPlugin<Helper extends RvHelper> {
 				new LightningChannelingRecipeCategory(),
 				it -> {
 					it.width = RvCategory.WIDER_WIDTH;
-					it.iconProvider = _ -> GuiGameElement.of(Items.LIGHTNING_ROD);
-					it.setSimpleWorkstationProvider(_ -> List.of(Items.LIGHTNING_ROD));
+					it.iconProvider = _ -> GuiGameElement.of(Items.LIGHTNING_ROD.unaffected());
+					it.setSimpleWorkstationProvider(_ -> List.of(Items.LIGHTNING_ROD.unaffected()));
 				});
 		register(
 				new ItemExplodingRecipeCategory(),

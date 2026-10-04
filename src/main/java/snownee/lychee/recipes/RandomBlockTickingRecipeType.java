@@ -8,7 +8,7 @@ import org.jspecify.annotations.Nullable;
 
 import com.google.common.collect.Streams;
 
-import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.context.ContextKeySet;

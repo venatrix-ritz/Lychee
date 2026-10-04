@@ -81,7 +81,8 @@ dependencies {
     implementation "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 
     // https://modrinth.com/mod/kiwi/versions
-    implementation annotationProcessor("maven.modrinth:kiwi:${project.kiwi_version}+fabric")
+    implementation "libs:Kiwi-mc26.2-Fabric:26.0.20"
+    annotationProcessor "libs:Kiwi-mc26.2-Fabric:26.0.20"
 //    implementation "libs:Kiwi-mc26.1-Fabric:26.0.15"
 //    annotationProcessor "libs:Kiwi-mc26.1-Fabric:26.0.15"
 

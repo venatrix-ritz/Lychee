@@ -1,7 +1,7 @@
 package snownee.lychee.util.recipe;
 
 
-import net.minecraft.advancements.criterion.BlockPredicate;
+import net.minecraft.advancements.predicates.BlockPredicate;
 import snownee.lychee.util.IngredientCollection;
 import snownee.lychee.util.context.LycheeContext;
 
