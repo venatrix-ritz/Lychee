@@ -20,6 +20,7 @@
 		"SimpleJsonResourceReloadListenerMixin",
 		"action.MarkerMixin",
 		"particles.PointedDripstoneBlockAccess",
+		"particles.SpeleothemBlockAccess",
 		"particles.PointedDripstoneBlockMixin",
 		"predicates.LocationPredicate$BuilderAccess",
 		"recipes.anvilcrafting.AnvilMenuMixin",

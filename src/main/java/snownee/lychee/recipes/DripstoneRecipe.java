@@ -33,6 +33,7 @@ import snownee.lychee.action.Exit;
 import snownee.lychee.contextual.Location;
 import snownee.lychee.contextual.Not;
 import snownee.lychee.mixin.particles.PointedDripstoneBlockAccess;
+import snownee.lychee.mixin.particles.SpeleothemBlockAccess;
 import snownee.lychee.mixin.predicates.LocationPredicate$BuilderAccess;
 import snownee.lychee.util.action.Job;
 import snownee.lychee.util.action.PostActionCommonProperties;
@@ -66,7 +67,7 @@ public class DripstoneRecipe extends LycheeRecipe<LycheeContext> implements Bloc
 		if (RecipeTypes.DRIPSTONE_DRIPPING.isEmpty()) {
 			return false;
 		}
-		var tipPos = PointedDripstoneBlockAccess.callFindTip(blockState, level, blockPos, 11, false);
+		var tipPos = SpeleothemBlockAccess.callFindTip(blockState, level, blockPos, 11, false);
 		if (tipPos == null) {
 			return false;
 		}
@@ -162,7 +163,7 @@ public class DripstoneRecipe extends LycheeRecipe<LycheeContext> implements Bloc
 			BlockPos blockPos,
 			RandomSource randomSource
 	) {
-		if (!PointedDripstoneBlockAccess.callIsStalactiteStartPos(state, serverLevel, blockPos)) {
+		if (!SpeleothemBlockAccess.callIsStalactiteStartPos(state, serverLevel, blockPos)) {
 			return false;
 		}
 		var f = randomSource.nextFloat();
@@ -179,7 +180,7 @@ public class DripstoneRecipe extends LycheeRecipe<LycheeContext> implements Bloc
 		Predicate<BlockState> predicate = blockState -> !blockState.isAir() && RecipeTypes.DRIPSTONE_DRIPPING.has(blockState);
 		BiPredicate<BlockPos, BlockState> biPredicate =
 				(blockPos, blockState) -> PointedDripstoneBlockAccess.callCanDripThrough(level, blockPos, blockState);
-		return PointedDripstoneBlockAccess.callFindBlockVertical(
+		return SpeleothemBlockAccess.callFindBlockVertical(
 				level,
 				blockPos2,
 				Direction.DOWN.getAxisDirection(),
