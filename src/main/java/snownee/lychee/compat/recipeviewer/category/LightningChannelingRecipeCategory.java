@@ -69,7 +69,7 @@ public class LightningChannelingRecipeCategory extends ItemShapelessRecipeCatego
 				"lightning_rod", (builder, recipeHolder) -> {
 					Supplier<BlockState> blockStateSupplier = () -> {
 						int time = (int) lightningBolt.seed % 80;
-						BlockState blockState = Blocks.LIGHTNING_ROD.unaffected().defaultBlockState();
+						BlockState blockState = Blocks.LIGHTNING_ROD.weathering().unaffected().defaultBlockState();
 						if (time <= 7) {
 							blockState = blockState.setValue(LightningRodBlock.POWERED, true);
 						}
